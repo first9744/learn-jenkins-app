@@ -71,3 +71,4 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
 
 echo "Testing Jenkins Pipeline" >> README.md
+ทดลองการเชื่อมต่อ >> README.md
