@@ -48,47 +48,6 @@ pipeline {
                     //     }
                     // }
                 }
-
-                stage('E2E') {
-                    agent {
-                        docker {
-                            image 'mcr.microsoft.com/playwright:v1.39.0-jammy'
-                            reuseNode true
-                        }
-                    }
-
-                    steps {
-                        sh '''
-                            npm install serve
-                            node_modules/.bin/serve -s build & 
-                            sleep 20  # เพิ่มเวลารอให้เพียงพอ
-                            npx playwright test --reporter=html
-                        '''
-                    }
-
-                    post {
-                        always {
-                            publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'playwright-report', reportFiles: 'index.html', reportName: 'Playwright HTML Report', reportTitles: '', useWrapperFileDirectly: true])
-                        }
-                    }
-                }
-            }
-        }
-
-        stage('Deploy') {
-            agent {
-                docker {
-                    image 'node:18-alpine'
-                    reuseNode true
-                }
-            }
-            steps {
-                sh '''
-                    npm install netlify-cli
-                    node_modules/.bin/netlify --version
-                    # สั่ง deploy ไปยัง Netlify
-                    node_modules/.bin/netlify deploy --prod --dir=build --site=$NETLIFY_SITE_ID
-                '''
             }
         }
     }
