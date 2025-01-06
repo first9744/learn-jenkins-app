@@ -60,8 +60,9 @@ pipeline {
                     steps {
                         sh '''
                             npm install serve
-                            node_modules/.bin/serve -s build & sleep 10
-                            npx playwright test  --reporter=html
+                            node_modules/.bin/serve -s build & 
+                            sleep 20  # เพิ่มเวลารอให้เพียงพอ
+                            npx playwright test --reporter=html
                         '''
                     }
 
@@ -85,7 +86,8 @@ pipeline {
                 sh '''
                     npm install netlify-cli
                     node_modules/.bin/netlify --version
-                    echo "Deploy to production. Site ID: $"
+                    # สั่ง deploy ไปยัง Netlify
+                    node_modules/.bin/netlify deploy --prod --dir=build --site=$NETLIFY_SITE_ID
                 '''
             }
         }
