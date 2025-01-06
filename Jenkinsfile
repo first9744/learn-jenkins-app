@@ -1,9 +1,9 @@
 pipeline {
     agent any
 
-    //environment {
-        //NETLIFY_SITE_ID = '9d51c6bc-d00b-458e-ba35-29a24141df86'
-    //}
+    environment {
+        NETLIFY_SITE_ID = '9d51c6bc-d00b-458e-ba35-29a24141df86'
+    }
 
     stages {
 
@@ -60,8 +60,7 @@ pipeline {
                     steps {
                         sh '''
                             npm install serve
-                            node_modules/.bin/serve -s build &
-                            sleep 10
+                            node_modules/.bin/serve -s build & sleep 10
                             npx playwright test  --reporter=html
                         '''
                     }
