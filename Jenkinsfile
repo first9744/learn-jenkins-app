@@ -1,9 +1,9 @@
 pipeline {
     agent any
 
-    environment {
-        NETLIFY_SITE_ID = '9d51c6bc-d00b-458e-ba35-29a24141df86'
-    }
+    //environment {
+        //NETLIFY_SITE_ID = '9d51c6bc-d00b-458e-ba35-29a24141df86'
+    //}
 
     stages {
 
